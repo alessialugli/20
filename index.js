@@ -13,7 +13,6 @@ const renderMenu = (currentPage) => {
     <ul>
       <li><a href="/" style="${currentPage === "home" ? selectedStyle : ""}">Home</a></li>
       <li><a href="/stati" style="${currentPage === "stati" ? selectedStyle : ""}">Stati</a></li>
-      <li><a href="/citta" style="${currentPage === "citta" ? selectedStyle : ""}">Città</a></li>
     </ul>
   `
 }
@@ -70,37 +69,8 @@ app.get("/stati", (req, res) => {
   `))
 })
 
-const citta = [
-  {
-      nome: "Roma",
-      stato: "Italia"
-  },
-  {
-      nome: "New York",
-      stato: "USA"
-  },
-  {
-      nome: "Tokyo",
-      stato: "Giappone"
-  }
-]
-
-app.get("/citta", (req, res) => {
-  res.send(renderHtml("citta", `
-  <h1>Qui trovate un elenco di Città</h1>
-  <ul>
-    ${citta.map((e => {
-      return `
-      <li>
-        <div>
-          <p>${e.nome}</p>
-          <p>${e.stato}</p>
-        </div>
-      </li>
-      `
-    })).join(" ")}
-  </ul>
-  `))
+app.get('/user/:id', function (req, res) {
+  res.send('user ' + req.params.id)
 })
 
 app.listen(3000, () => console.log("server listening on port 3000"))
